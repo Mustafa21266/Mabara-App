@@ -1,0 +1,31 @@
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+const jwt = require("express-jwt");
+const bodyParser = require("body-parser");
+const fileUpload = require("express-fileupload");
+const cookieParser = require("cookie-parser");
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(fileUpload());
+
+const PORT = 3000;
+
+
+const user = require("./routes/user");
+app.use("/api/v1", user);
+
+app.get('/', (req, res)=>{
+    res.status(200);
+    res.send("Welcome to root URL of Server");
+});
+
+app.listen(PORT, (error) =>{
+    if(!error)
+        console.log("Server is Successfully Running, and App is listening on port "+ PORT);
+    else 
+        console.log("Error occurred, server can't start", error);
+    }
+);
