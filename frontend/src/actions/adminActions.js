@@ -21,7 +21,7 @@ export const register = (registerData) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         }
-        const { data } = await axios.post(`http://127.0.0.1:4000/api/v1/register`, registerData, config)
+        const { data } = await axios.post(`http://127.0.0.1:8000/api/v1/register`, registerData, config)
         dispatch({
             type: REGISTER,
             payload: data
@@ -35,10 +35,16 @@ export const register = (registerData) => async (dispatch) => {
 };
 
 //GET USER DETAILS
-export const getUserDetails = () => async (dispatch) => {
+export const getUserDetails = (token) => async (dispatch) => {
 
     try {
-        const { data } = await axios.get(`http://127.0.0.1:4000/api/v1/getUserDetails`)
+        const config = {
+            headers: {
+                'x-access-token': token,
+                'Access-Control-Allow-Headers': '*'
+            }
+        }
+        const { data } = await axios.get(`http://127.0.0.1:8000/api/v1/getUserDetails/${token}`,config)
         dispatch({
             type: GET_USER_DETAILS,
             payload: data
@@ -60,7 +66,7 @@ export const loginAdmin = (loginData) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         }
-        const { data } = await axios.post(`http://127.0.0.1:4000/api/v1/login`, loginData, config)
+        const { data } = await axios.post(`http://127.0.0.1:8000/api/v1/login`, loginData, config)
         dispatch({
             type: LOGIN_ADMIN,
             payload: data
@@ -74,7 +80,7 @@ export const loginAdmin = (loginData) => async (dispatch) => {
 };
 //LOGOUT 
 export const logoutAdmin = async (dispatch) => {
-    await axios.get(`http://127.0.0.1:4000/api/v1/logout`)
+    await axios.get(`http://127.0.0.1:8000/api/v1/logout`)
     dispatch({
         type: LOGOUT_ADMIN,
         payload: []
@@ -90,7 +96,7 @@ export const forgotPassword = (forgotPasswordData) => async (dispatch) => {
                 'Content-Type': 'application/json' 
             }
         }
-        const { data } = await axios.post(`http://127.0.0.1:4000/api/v1/password/forgot`,  forgotPasswordData,config)
+        const { data } = await axios.post(`http://127.0.0.1:8000/api/v1/password/forgot`,  forgotPasswordData,config)
         dispatch({
             type: FORGOT_PASSWORD,
             payload: data
@@ -111,7 +117,7 @@ export const resetPassword = (token, resetPasswordsData) => async (dispatch) => 
                 'Content-Type': 'application/json' 
             }
         }
-        const { data } = await axios.put(`http://127.0.0.1:4000/api/v1/password/reset/${token}`,  resetPasswordsData,config)
+        const { data } = await axios.put(`http://127.0.0.1:8000/api/v1/password/reset/${token}`,  resetPasswordsData,config)
         dispatch({
             type: RESET_PASSWORD,
             payload: data
@@ -138,7 +144,7 @@ export const editUserDetails = (id, userData) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         }
-        const { data } = await axios.put(`http://127.0.0.1:4000/api/v1/me/update/${id}`, userData, config)
+        const { data } = await axios.put(`http://127.0.0.1:8000/api/v1/me/update/${id}`, userData, config)
         dispatch({
             type: EDIT_PROFILE,
             payload: data
@@ -162,7 +168,7 @@ export const editUserDetailsAdmin = (id, userData) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         }
-        const { data } = await axios.put(`http://127.0.0.1:4000/api/v1/admin/user/update/${id}`, userData, config)
+        const { data } = await axios.put(`http://127.0.0.1:8000/api/v1/admin/user/update/${id}`, userData, config)
         dispatch({
             type: EDIT_PROFILE_ADMIN,
             payload: data
@@ -180,7 +186,7 @@ export const editUserDetailsAdmin = (id, userData) => async (dispatch) => {
 //Delete User FOR ADMIN ONLY
 export const deleteUserAdmin = (id) => async (dispatch) => {
     try {
-        const { data } = await axios.delete(`http://127.0.0.1:4000/api/v1/admin/user/delete/${id}`)
+        const { data } = await axios.delete(`http://127.0.0.1:8000/api/v1/admin/user/delete/${id}`)
         dispatch({
             type: DELETE_USER_ADMIN,
             payload: data
@@ -197,7 +203,7 @@ export const deleteUserAdmin = (id) => async (dispatch) => {
 //Get all users
 export const getAllUsers = () => async (dispatch) => {
     try {
-        const { data } = await axios.get(`http://127.0.0.1:4000/api/v1/admin/users/all`)
+        const { data } = await axios.get(`http://127.0.0.1:8000/api/v1/admin/users/all`)
         dispatch({
             type: GET_ALL_USERS,
             payload: data

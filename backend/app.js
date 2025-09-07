@@ -17,11 +17,8 @@ const PORT = 3000;
 
 const user = require("./routes/user");
 app.use("/api/v1", user);
-
-app.get('/', (req, res)=>{
-    res.status(200);
-    res.send("Welcome to root URL of Server");
-});
+const admin = require("./routes/admin");
+app.use("/api/v1", admin);
 
 app.listen(PORT, (error) =>{
     if(!error)

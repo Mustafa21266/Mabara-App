@@ -6,13 +6,10 @@ const jwt = require('jsonwebtoken');
 
 exports.registerUser = async (req, res, next) => {
     try {
-        if(req.body.phoneNo){
-            req.body.phoneNo = String(req.body.phoneNo)
-        }
         const user = await User.create(req.body);
-        const token = jwt.sign({_id: user._id},process.env.JWT_SECRET)
+        const token = jwt.sign({_id: user._id},"fghfghw132414as@!")
             const options = {
-                expires: new Date(Date.now() + process.env.COOKIE_EXPIRY_TIME * 24 * 60 * 60 * 1000),
+                expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
                 httpOnly: true
             }
             res.status(200).cookie('token',token, options).json({
@@ -30,19 +27,23 @@ exports.registerUser = async (req, res, next) => {
 }
 exports.loginUser = async (req, res, next) => {
     try{
-        const { phoneNo, password } = req.body;
-        console.log(phoneNo)
-    let user = await User.findOne({ phoneNo: phoneNo}).select("+password")
+        const { username, password } = req.body;
+        console.log(username)
+    let user = await User.findOne({ username: username}).select("+password")
     if(user){
         let isCorrectPassword = await bcrypt.compare(password, user.password)
         if(isCorrectPassword){
             //IMPORTANT [[[[[[[[[[[[[[[[[[[USER]]]]]]]]]]]]]]]]]]]
-            const token = jwt.sign({_id: user._id},process.env.JWT_SECRET)
+            const token = jwt.sign({_id: user._id},"fghfghw132414as@!")
             const options = {
-                expires: new Date(Date.now() + process.env.COOKIE_EXPIRY_TIME * 24 * 60 * 60 * 1000),
-                httpOnly: true
+                expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+                httpOnly: true,
+            secure: true, // Ensure this is true in production
+            sameSite: "None", // This allows cross-site requests
+            maxAge: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 1 day
+            path: "/",
             }
-            user = await User.findOne({ phoneNo: phoneNo})
+            user = await User.findOne({ username: username})
             res.status(200).cookie('token',token, options).json({
                 success: true,
                 token,
@@ -53,7 +54,7 @@ exports.loginUser = async (req, res, next) => {
     }else {
         res.status(401).json({
             success: false,
-            message: "PhoneNo & Passwords don't match"
+            message: "Username & Passwords don't match"
         })
     }
     }catch(err){
@@ -70,11 +71,12 @@ exports.getUserDetails = async (req, res, next) => {
         console.log(req._id)
     let user = await User.findOne({ _id: req.user._id})
     if(user){
-        const token = jwt.sign({_id: user._id},process.env.JWT_SECRET)
+        const token = jwt.sign({_id: user._id},"fghfghw132414as@!")
         const options = {
-            expires: new Date(Date.now() + process.env.COOKIE_EXPIRY_TIME * 24 * 60 * 60 * 1000),
+            expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
             httpOnly: true
         }
+        console.log(user)
         res.status(200).cookie('token',token, options).json({
             success: true,
             token,
@@ -196,9 +198,9 @@ exports.resetPassword = async (req, res, next) => {
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
     await user.save();
-    const token = jwt.sign({_id: user._id},process.env.JWT_SECRET)
+    const token = jwt.sign({_id: user._id},"fghfghw132414as@!")
             const options = {
-                expires: new Date(Date.now() + process.env.COOKIE_EXPIRY_TIME * 24 * 60 * 60 * 1000),
+                expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
                 httpOnly: true
             }
             user = await User.findById(user._id)

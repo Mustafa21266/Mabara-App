@@ -15,7 +15,7 @@ const auth = require("../middlewares/auth");
 router.route('/register').post(registerUser)
 router.route('/login').post(loginUser)
 router.route('/logout').get(auth, logoutUser)
-router.route('/getUserDetails').get(auth, getUserDetails)
+router.route('/getUserDetails/:token').get(auth, getUserDetails)
 router.route('/me/update/:id').put(auth, editUserDetails)
 
 router.route("/password/forgot").post(forgotPassword)

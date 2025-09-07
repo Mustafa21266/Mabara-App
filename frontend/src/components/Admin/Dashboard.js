@@ -17,10 +17,11 @@ class Dashboard extends Component {
       loading: true,
     };
     store.dispatch(getAllUsers()).then(async (usersData) => {
+      console.log(store.getState().article)
       if (usersData.success === true) {
           this.setState({
             users: usersData.users,
-            articles: store.getState().article.articles,
+            articles: store.getState().article ? store.getState().article.articles : [],
             loading: false,
           });
         } else {
@@ -101,8 +102,13 @@ class Dashboard extends Component {
           sort: "asc",
         },
         {
-          label: "رقم التليفون",
-          field: "phoneNo",
+          label: "إسم المستخدم",
+          field: "username",
+          sort: "asc",
+        },
+        {
+          label: "البريد الإلكتروني",
+          field: "email",
           sort: "asc",
         },
         {
@@ -127,7 +133,8 @@ class Dashboard extends Component {
       data.rows = data.rows.concat({
         id: user._id,
         name: user.name,
-        phoneNo: `${user.phoneNo}`,
+        username: user.username,
+        email: `${user.email}`,
         role: `${user.role}`,
         createdAt: String(user.createdAt).substring(0, 10),
         actions: (
@@ -179,10 +186,10 @@ class Dashboard extends Component {
               dir="rtl"
             >
               <div className="col-12 col-lg-2" dir="ltr">
-                <h1 style={{ textAlign: "center" }}>
+                <h1 style={{ textAlign: "center", color: 'white' }}>
                   <i className="bi bi-speedometer"></i>
                 </h1>
-                <h1 style={{ textAlign: "center" }}> لوحة التحكم</h1>
+                <h1 style={{ textAlign: "center", color: 'white' }}> لوحة التحكم</h1>
                 <br></br>
                 <ul className="nav flex-column nav-pills nav-fill">
                   <li className="nav-item">
@@ -195,6 +202,7 @@ class Dashboard extends Component {
                       role="tab"
                       aria-controls="home"
                       aria-selected="true"
+                      style={{color: 'white'}}
                     >
                       الرئيسية
                     </a>
@@ -209,6 +217,7 @@ class Dashboard extends Component {
                       role="tab"
                       aria-controls="user"
                       aria-selected="false"
+                      style={{color: 'white'}}
                     >
                       المستخدمين
                     </a>
@@ -223,6 +232,7 @@ class Dashboard extends Component {
                       role="tab"
                       aria-controls="article"
                       aria-selected="false"
+                      style={{color: 'white'}}
                     >
                       المقالات
                     </a>
@@ -286,29 +296,6 @@ class Dashboard extends Component {
                         className="col-12 col-lg-6"
                         style={{ textAlign: "center" }}
                       >
-                        {/* <div className="card">
-                          <br></br>
-                          <i
-                            className="bi bi-house-door"
-                            style={{ fontSize: "7rem" }}
-                          ></i>
-                          <div className="card-body">
-                            <h4 className="card-title text-center">
-                              {this.state.places.length}
-                            </h4>
-                            <p className="card-text text-center">أماكن</p>
-                            <hr></hr>
-                            <a
-                              className="card-text text-center"
-                              type="button"
-                              onClick={(e) =>
-                                document.getElementById("place-tab").click()
-                              }
-                            >
-                              عرض التفاصيل
-                            </a>
-                          </div>
-                        </div> */}
                       </div>
                     </div>
                     <br></br>
@@ -345,39 +332,14 @@ class Dashboard extends Component {
                         className="col-12 col-lg-6"
                         style={{ textAlign: "center" }}
                       >
-                        {/* <div className="card">
-                          <br></br>
-                          <i
-                            className="bi bi-calendar4-week"
-                            style={{ fontSize: "7rem" }}
-                          ></i>
-                          <div className="card-body">
-                            <h4 className="card-title text-center">
-                              {this.state.reservations.length}
-                            </h4>
-                            <p className="card-text text-center">الحجوزات</p>
-                            <hr></hr>
-                            <a
-                              className="card-text text-center"
-                              type="button"
-                              onClick={(e) =>
-                                document
-                                  .getElementById("reservation-tab")
-                                  .click()
-                              }
-                            >
-                              عرض التفاصيل
-                            </a>
-                          </div>
-                        </div> */}
                       </div>
                     </div>
                   </div>
                   <div
                     className="tab-pane fade"
-                    id="reservation"
+                    id="user"
                     role="tabpanel"
-                    aria-labelledby="reservation-tab"
+                    aria-labelledby="user-tab"
                   >
                     <MDBDataTable
                       data={this.setUsers()}

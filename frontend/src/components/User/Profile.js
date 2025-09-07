@@ -55,7 +55,7 @@ class Profile extends Component {
                 <br></br>
                 <div
                   className="row mt-5 user-info  animate__animated animate__fadeIn"
-                  style={{ padding: "20px 50px" }}
+                  style={{ padding: "20px 50px" }} dir="rtl"
                 >
                   <div className="row">
                     <div className="col-12 col-md-12">
@@ -91,22 +91,10 @@ class Profile extends Component {
                           >
                             تفاصيل الحساب
                           </button>
-                          <button
-                            className="nav-link"
-                            id="nav-reservation-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#nav-reservation"
-                            type="button"
-                            role="tab"
-                            aria-controls="nav-reservation"
-                            aria-selected="false"
-                          >
-                            حجوزاتي
-                          </button>
                           {/* <button className="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button> */}
                         </div>
                       </nav>
-                      <div className="tab-content" id="nav-tabContent">
+                      <div className="tab-content" id="nav-tabContent" style={{color: 'white'}}>
                         <div
                           className="tab-pane fade show active"
                           id="nav-home"
@@ -114,42 +102,42 @@ class Profile extends Component {
                           aria-labelledby="nav-home-tab"
                         >
                           <br></br>
-                          <h4
-                            style={{ textAlign: "right", marginBottom: "20px" }}
-                          >
-                            {" "}
-                            <span>{store.getState().auth.user.name}</span>{" "}
-                            :الأسم
-                          </h4>
-                          <h4
-                            style={{ textAlign: "right", marginBottom: "20px" }}
-                          >
-                            رقم التليفون:{" "}
-                            <span>{store.getState().auth.user.phoneNo}</span>
-                          </h4>
-                          <h4
-                            style={{ textAlign: "right", marginBottom: "20px" }}
-                          >
-                            تاريخ التسجيل :{" "}
-                            <span>
-                              {String(
+                          <div className="mb-3 row">
+                        <label htmlFor="staticEmail" className="col-sm-2 col-form-label text-center">الأسم</label>
+                        <div className="col-sm-10">
+                          <input type="text" readOnly className="form-control" id="staticEmail" value={store.getState().auth.user.name} style={{color:'black'}} />
+                        </div>
+                      </div>
+                          <div className="mb-3 row">
+                        <label htmlFor="staticEmail" className="col-sm-2 col-form-label text-center">إسم المستخدم</label>
+                        <div className="col-sm-10">
+                          <input type="text" readOnly className="form-control" id="staticEmail" value={store.getState().auth.user.username} style={{color:'black'}} />
+                        </div>
+                      </div>
+                                                <div className="mb-3 row">
+                        <label htmlFor="staticEmail" className="col-sm-2 col-form-label text-center">البريد الإلكتروني</label>
+                        <div className="col-sm-10">
+                          <input type="text" readOnly className="form-control" id="staticEmail" value={store.getState().auth.user.email} style={{color:'black'}} />
+                        </div>
+                      </div>
+                      <div className="mb-3 row">
+                        <label htmlFor="staticEmail" className="col-sm-2 col-form-label text-center">تاريخ التسجيل</label>
+                        <div className="col-sm-10">
+                          <input type="text" readOnly className="form-control" id="staticEmail" value={String(
                                 store.getState().auth.user.createdAt
-                              ).substring(0, 10)}
-                            </span>
-                          </h4>
-                          <h4
-                            style={{ textAlign: "right", marginBottom: "20px" }}
-                          >
-                            {" "}
-                            <span>
-                              {store
+                              ).substring(0, 10)} style={{color:'black'}} />
+                        </div>
+                      </div>
+                      <div className="mb-3 row">
+                        <label htmlFor="staticEmail" className="col-sm-2 col-form-label text-center">نوع الحساب</label>
+                        <div className="col-sm-10">
+                          <input type="text" readOnly className="form-control" id="staticEmail" value={store
                                 .getState()
                                 .auth.user.role.charAt(0)
                                 .toUpperCase() +
-                                store.getState().auth.user.role.substring(1)}
-                            </span>
-                            : نوع الحساب
-                          </h4>
+                                store.getState().auth.user.role.substring(1)} style={{color:'black'}} />
+                        </div>
+                      </div>
                         </div>
                         <div
                           className="tab-pane fade"

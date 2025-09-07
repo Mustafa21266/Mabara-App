@@ -39,6 +39,7 @@ import EditUser from "./components/Admin/EditUser";
 import Loader from "./components/Loader";
 import ForgotPassword from "./components/User/ForgotPassword";
 import NewPassword from "./components/User/NewPassword";
+import Cookies from 'js-cookie';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -46,15 +47,21 @@ class App extends Component {
       loading: false,
       refresh: false,
     };
-    // store.dispatch(getUserDetails()).then((data) => {
-    //           if (data.success) {
-    //             this.setState({ refresh: true, loading: false });
-    //           } else {
-    //             this.setState({ loading: false });
-    //           }
-    // });
+    console.log(localStorage.getItem('token'))
   }
-  componentDidMount() {}
+  componentDidMount() {
+    setTimeout(()=>{
+    console.log(localStorage.getItem('token'))
+    store.dispatch(getUserDetails(localStorage.getItem('token'))).then((data) => {
+              if (data.success) {
+                this.setState({ refresh: true, loading: false });
+              } else {
+                this.setState({ loading: false });
+              }
+    });
+    },2000)
+
+  }
   render() {
     return (
       <Fragment>

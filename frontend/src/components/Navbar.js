@@ -39,7 +39,7 @@ class Navbar extends Component {
         return(
             <Fragment>
               {this.state.redirect ? <Redirect to="/"></Redirect>: ""}
-<nav dir="rtl" className="navbar navbar-expand-lg w-100 nav-style animate__animated animate__slideInDown animate__slower" style={{position: 'fixed',top: 0,zIndex: 5,backgroundColor: '#ECEFF5'}}>
+<nav dir="rtl" className="navbar navbar-expand-lg w-100 nav-style animate__animated animate__slideInDown animate__slower" style={{position: 'fixed',top: 0,zIndex: 5,backgroundColor: '#ECEFF5',height: '90px'}}>
   <div className="container-fluid">
     <Link className="navbar-brand" onClick={this.resetNav} to="/"><img src={mabaraLogo} style={{width: "120px", height: "90px"}}></img></Link>
     <button style={{color:"white"}} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,10 +48,10 @@ class Navbar extends Component {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav mb-2 mb-lg-0">
         <li className="nav-item">
-          <Link className="nav-link active" onClick={this.changeNav} aria-current="page" to="/" style={{color: 'black',textAlign: 'center',fontWeight: 900}}>الرئيسية</Link>
+          <Link className="nav-link active ibm-plex-sans-arabic-bold" onClick={this.changeNav} aria-current="page" to="/" style={{color: 'black',textAlign: 'center',fontWeight: 900}}>الرئيسية</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/articles/all"  onClick={this.changeNav} style={{color: 'black',textAlign: 'center'}}>مقالات</Link>
+          <Link className="nav-link ibm-plex-sans-arabic-bold" to="/articles/all"  onClick={this.changeNav} style={{color: 'black',textAlign: 'center'}}>مقالات</Link>
         </li>
       </ul>
         <div className="btn-group me-auto" style={{float: 'left'}}>
@@ -64,7 +64,7 @@ class Navbar extends Component {
         </Fragment>
       ): (
         <Fragment>
-        <i className="fas fa-user-circle" style={{fontSize: '28px'}}></i>
+        <i className="fas fa-user-circle" style={{fontSize: '28px',color: '#e60006'}}></i>
     </Fragment>
       )}
       
@@ -72,7 +72,7 @@ class Navbar extends Component {
     
   ):(
     <Fragment>
-        <i className="fas fa-user-circle" style={{fontSize: '26px'}}></i>
+        <i className="fas fa-user-circle" style={{fontSize: '26px',color: '#e60006'}}></i>
     </Fragment>
     
   )}
@@ -82,22 +82,21 @@ class Navbar extends Component {
      <Fragment>
        {store.getState().auth.user.role === 'admin' && (
          <Fragment>
-<Link className="dropdown-item text-center" to="/admin/dashboard">لوحه التحكم</Link>
+<Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/admin/dashboard">لوحه التحكم</Link>
 <div className="dropdown-divider"></div>
-<Link className="dropdown-item text-center" to="/admin/article/create">إنشاء مقاله جديده</Link>
+<Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/admin/article/create">إنشاء مقاله جديده</Link>
 <div className="dropdown-divider"></div>
          </Fragment>
        )}
- <div className="dropdown-divider"></div>
-<Link className="dropdown-item text-center" to="/me">حسابي الشخصي</Link>
+<Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/me">حسابي الشخصي</Link>
        <div className="dropdown-divider"></div>
-       <button className="dropdown-item text-danger text-center" onClick={this.logOutHandler.bind(this)}>تسجيل الخروج</button>
+       <button className="dropdown-item text-danger text-center ibm-plex-sans-arabic-semibold" onClick={this.logOutHandler.bind(this)}>تسجيل الخروج</button>
 </Fragment>
    ) : (
      <Fragment>
-       <Link className="dropdown-item text-center" to="/login">تسجيل الدخول</Link>
+       <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/login">تسجيل الدخول</Link>
               <div className="dropdown-divider"></div>
-             <Link className="dropdown-item text-center" to="/register">إنشاء حساب</Link>
+             <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/register">إنشاء حساب</Link>
      </Fragment>
 
    )}

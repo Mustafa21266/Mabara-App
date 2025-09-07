@@ -9,34 +9,25 @@ import intlTelInput from "intl-tel-input";
 import Loader from "../Loader";
 class Login extends Component {
   regex = new RegExp("^(?=.*[a-z])(?=.*[0-9])(?=.{6,})");
-  phoneInput;
   constructor(props) {
     super(props);
     this.state = {
-      phoneNo: "",
+      username: "",
       password: "",
       loggedIn: false,
       loading: true,
     };
     this.checkPassword = this.checkPassword.bind(this);
-    this.checkPhoneNo = this.checkPhoneNo.bind(this);
   }
   componentDidMount() {
     this.setState({ loading: false });
-    setTimeout(() => {
-      let input = document.querySelector("#phone");
-      this.phoneInput = intlTelInput(input, {
-        initialCountry: "EG",
-        utilsScript:
-          "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-      });
-    }, 1000);
+
   }
   async onSubmitHandler(e) {
     e.preventDefault();
     document.getElementById("loader").style.display = "block";
     const formData = new FormData();
-    formData.set("phoneNo", this.phoneInput.getNumber());
+    formData.set("username", e.target.username.value);
     formData.set("password", e.target.password.value);
     await store.dispatch(loginAdmin(formData)).then(async (data) => {
       if (data.success === true) {
@@ -60,18 +51,6 @@ class Login extends Component {
       });
     } else {
       document.getElementById("passwordWarning").style.display = "block";
-    }
-  }
-  checkPhoneNo(e) {
-    if (typeof this.phoneInput == "object") {
-      if (e.target.value.length === 11) {
-        document.getElementById("numberWarning").style.display = "none";
-        this.setState((state, props) => {
-          return { phoneNo: this.phoneInput.getNumber() };
-        });
-      } else {
-        document.getElementById("numberWarning").style.display = "block";
-      }
     }
   }
   render() {
@@ -98,7 +77,7 @@ class Login extends Component {
                 <br></br>
                 <br></br>
                 <br></br>
-                <div className="container" style={{ height: "100vh" }}>
+                <div className="container" style={{ height: "100vh" }} dir="rtl">
                   <div className="row animate__animated animate__fadeIn animate__slower">
                     <img
                       id="loginImg"
@@ -124,28 +103,17 @@ class Login extends Component {
                         <br></br>
                         <form onSubmit={(e) => this.onSubmitHandler(e)}>
                           <div className="form-group">
-                            {/* <label for="exampleInputEmail1">Email address</label> */}
                             <input
-                              type="number"
-                              id="phone"
+                              type="test"
+                              id="username"
                               className="form-control"
-                              placeholder="رقم الموبايل"
-                              type="tel"
-                              name="phone"
+                              placeholder="إسم المستخدم"
+                              name="username"
                               style={{ borderRadius: "25px" }}
-                              name="phoneNo"
-                              defaultValue={this.state.phoneNo}
-                              onChange={(e) => this.checkPhoneNo(e)}
+                              defaultValue={this.state.username}
                               required
                             />
                             <br></br>
-                            <p
-                              id="numberWarning"
-                              style={{ textAlign: "right", display: "none" }}
-                            >
-                              رقم التليفون لابد ان يكون مكون من 11 رقم
-                            </p>
-                            {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
                           </div>
                           <br></br>
                           <div className="form-group">

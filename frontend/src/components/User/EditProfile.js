@@ -105,6 +105,10 @@ class EditProfile extends Component {
                     {this.state.edited ? <Redirect to="/me" /> : ""}
                     <div className="col-12 col-lg-6 d-block mx-auto">
                       <div className="login-container">
+                        <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
                         <h1 className="text-center">تعديل بيانات الحساب</h1>
                         <br></br>
                         <form onSubmit={(e) => this.onSubmitHandler(e)}>
