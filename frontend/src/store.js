@@ -2,8 +2,12 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import userReducer from './reducers/userReducer';
+import articleReducer from './reducers/articleReducer';
+import pcReducer from './reducers/pcReducer';
 const reducer = combineReducers({
-    auth: userReducer
+    auth: userReducer,
+    article: articleReducer,
+    pc: pcReducer
 })
 
 let initialState = {

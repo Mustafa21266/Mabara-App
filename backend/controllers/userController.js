@@ -221,10 +221,12 @@ exports.editUserDetails = async (req, res, next) => {
             message: 'Unauthorized Action!',
         })
     }else {
-        console.log(req.body.password, req.body.confirmPassword)
+        console.log(req.body.password, req.body.confirmPassword, user.role)
         if(req.body.password === req.body.confirmPassword){
-            const user = await User.findById(req.params.id);
+            // const user = await User.findById(req.params.id);
             user.name = req.body.name
+            user.username = req.body.username
+            user.email = req.body.email
             user.password = req.body.password
             await user.save();
             res.status(200).json({
@@ -240,6 +242,7 @@ exports.editUserDetails = async (req, res, next) => {
         }
     }  
     }catch(err){
+        console.log(err)
         res.status(500).json({
             success: false,
             message: 'An error has occured'

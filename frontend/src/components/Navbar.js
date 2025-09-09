@@ -82,6 +82,8 @@ class Navbar extends Component {
      <Fragment>
        {store.getState().auth.user.role === 'admin' && (
          <Fragment>
+          <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/admin/pc/create">إضافة كمبيوتر</Link>
+          <div className="dropdown-divider"></div>
 <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/admin/dashboard">لوحه التحكم</Link>
 <div className="dropdown-divider"></div>
 <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/admin/article/create">إنشاء مقاله جديده</Link>

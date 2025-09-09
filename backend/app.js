@@ -19,6 +19,8 @@ const user = require("./routes/user");
 app.use("/api/v1", user);
 const admin = require("./routes/admin");
 app.use("/api/v1", admin);
+const pc = require("./routes/pc");
+app.use("/api/v1", pc);
 
 app.listen(PORT, (error) =>{
     if(!error)

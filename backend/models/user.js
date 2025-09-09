@@ -29,11 +29,11 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        required: [true, 'Please enter a role!'],
-        enum: {
-            values: ['it-manager','it-support','application-support','network-admin','system-admin','team-leader','it-manager'],
-            message: 'Please select correct role'
-        },
+        // required: [true, 'Please enter a role!'],
+        // enum: {
+        //     values: ['it-manager','it-support','application-support','network-admin','system-admin','team-leader','it-manager'],
+        //     message: 'Please select correct role'
+        // },
         default: 'it-support'
     },
     createdAt: {

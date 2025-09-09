@@ -99,10 +99,12 @@ class Login extends Component {
                       <br></br>
                       <br></br>
                       <div className="login-container">
-                        <h1 className="text-center">تسجيل الدخول</h1>
+                        <h1 className="text-center text-white">تسجيل الدخول</h1>
                         <br></br>
                         <form onSubmit={(e) => this.onSubmitHandler(e)}>
                           <div className="form-group">
+                            <h5 className="text-center text-white">إسم المستخدم</h5>
+                            <br></br>
                             <input
                               type="test"
                               id="username"
@@ -117,6 +119,8 @@ class Login extends Component {
                           </div>
                           <br></br>
                           <div className="form-group">
+                                                        <h5 className="text-center text-white">كلمة السر</h5>
+                            <br></br>
                             {/* <label for="exampleInputPassword1">Password</label> */}
                             <input
                               type="password"
@@ -141,7 +145,7 @@ class Login extends Component {
                           <br></br>
                           <button
                             type="submit"
-                            className="btn btn-outline-primary d-block mx-auto"
+                            className="btn btn-outline-light d-block mx-auto"
                             style={{
                               borderRadius: "50px",
                               padding: "10px 30px",
@@ -161,12 +165,12 @@ class Login extends Component {
                           </div>
                         </form>
                         <br></br>
-                        <p className="text-center">
-                          مستخدم جديد؟{" "}
-                          <Link to="/register">تسجيل كمستخدم جديد</Link>
+                        <p className="text-center text-white">
+                          مستخدم جديد؟
+                          <Link to="/register" style={{marginRight: '10px',color: '#e60006'}}>تسجيل كمستخدم جديد</Link>
                         </p>
                         <p className="text-center">
-                          <Link to="/password/forgot">نسيت كلمه السر؟</Link>
+                          <Link to="/password/forgot" style={{color: '#e60006'}}>نسيت كلمه السر؟</Link>
                         </p>
                       </div>
                     </div>
